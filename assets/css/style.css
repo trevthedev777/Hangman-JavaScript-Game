@@ -1,0 +1,12 @@
+body {
+    color: white;
+    background-color: #34495e;
+}
+
+/* Hangman Pole */
+.figure-container {
+    fill: transparent;
+    stroke: #fff;
+    stroke-width: 4px;
+    stroke-linecap: round;
+}
