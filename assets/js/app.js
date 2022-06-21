@@ -27,12 +27,13 @@ function displayWord() {
     wordElement.innerHTML = `
         ${selectedWord
         .split("")
-        .map(letter => `
-        <span class="letter">
-            ${correctLetters.includes(letter) ? letter : ""}
-            </span>
-            `).join("")
-        }
+        .map(
+            letter => `
+                <span class="letter">
+                    ${correctLetters.includes(letter) ? letter : ""}
+                </span>
+            `)
+        .join("")}
     `;
 
     // When the user wins the round
@@ -43,5 +44,47 @@ function displayWord() {
         popup.style.display = "flex";
     }
 };
+
+// Update wrong letters element
+function updateWrongLettersElement() {
+    console.log("Update Wrong");
+};
+
+// show notification
+function showNotification() {
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 2000);
+};
+
+// Keydown Letter press
+// setting the window as the event listener for key press and keydown
+window.addEventListener("keydown", e => {
+    // console.log(e.keycode)
+    if (e.code >= 'KeyA' && e.code <= 'KeyZ') {
+        const letter = e.key;
+
+        if (selectedWord.includes(letter)) {
+            if (!correctLetters.includes(letter)) {
+                correctLetters.push(letter);
+
+                displayWord();
+            } else {
+                showNotification();
+            }
+        } else {
+            if (!wrongLetters.includes(letter)) {
+                wrongLetters.push(letter);
+
+                updateWrongLettersElement();
+            } else {
+                showNotification();
+            }
+        }
+    }
+});
+
 
 displayWord();
